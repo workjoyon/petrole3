@@ -7,7 +7,6 @@ from app.config import settings
 def _fix_async_url(url: str) -> str:
     """Fix Neon.tech connection string for asyncpg compatibility.
     asyncpg uses 'ssl=require' not 'sslmode=require'."""
-    import ssl as _ssl
     if "asyncpg" in url and "sslmode=" in url:
         url = url.replace("?sslmode=require", "").replace("&sslmode=require", "")
         url = url.replace("?channel_binding=require", "").replace("&channel_binding=require", "")

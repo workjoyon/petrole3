@@ -26,12 +26,10 @@ from app.domain.schemas import (
     CountryImpactOut,
     FlowImpactOut,
     NarrativeOut,
-    SimulationDetailOut,
     SimulationRunCombinedRequest,
     SimulationRunOut,
     SimulationRunRequest,
     SimulationStepOut,
-    SimulationSummary,
 )
 from app.engine.core import SimulationEngine
 from app.engine.narrative import generate_narrative

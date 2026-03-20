@@ -40,7 +40,7 @@ def generate_narrative(result: SimulationResult, scenario_name: str = "Unnamed")
     # Flow losses
     total_loss = s.get("total_flow_loss_mbpd", 0)
     if total_loss > 0:
-        lines.append(f"### Flow Disruptions")
+        lines.append("### Flow Disruptions")
         lines.append(f"Total flow volume lost: **{total_loss:.2f} Mb/d**")
         lines.append("")
 
@@ -54,7 +54,6 @@ def generate_narrative(result: SimulationResult, scenario_name: str = "Unnamed")
         if disrupted:
             lines.append("Top disrupted flows:")
             for f in disrupted:
-                vol_lost = f.volume_before - f.volume_after
                 lines.append(
                     f"- **{f.flow_id}**: {f.volume_before:.3f} → "
                     f"{f.volume_after:.3f} Mb/d ({f.loss_pct:.0f}% loss)"
