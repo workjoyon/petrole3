@@ -174,7 +174,7 @@ class ScenarioAction(Base):
     action_type = Column(String(50), nullable=False)
     target_id = Column(String(100), nullable=False)
     severity = Column(Float, nullable=False, default=1.0)
-    params = Column(JSONB, nullable=False, default={})
+    params = Column(JSONB, nullable=False, default=dict)
     order_index = Column(Integer, nullable=False, default=0)
 
     scenario = relationship("Scenario", back_populates="actions")
@@ -246,7 +246,7 @@ class SimulationFlowImpact(Base):
     volume_before = Column(Float, nullable=False)
     volume_after = Column(Float, nullable=False)
     loss_pct = Column(Float, nullable=False)
-    loss_reasons = Column(JSONB, nullable=False, default=[])
+    loss_reasons = Column(JSONB, nullable=False, default=list)
 
     run = relationship("SimulationRun", back_populates="flow_impacts")
 
@@ -261,8 +261,8 @@ class SimulationStep(Base):
     step_number = Column(Integer, nullable=False)
     rule_id = Column(String(10), nullable=False)
     description = Column(Text, nullable=False)
-    affected_entities = Column(JSONB, nullable=False, default={})
-    detail = Column(JSONB, nullable=False, default={})
+    affected_entities = Column(JSONB, nullable=False, default=dict)
+    detail = Column(JSONB, nullable=False, default=dict)
 
     run = relationship("SimulationRun", back_populates="steps")
 

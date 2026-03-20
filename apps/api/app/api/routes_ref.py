@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -52,7 +52,6 @@ async def get_country(code: str, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Country).where(Country.code == code.upper()))
     country = result.scalar_one_or_none()
     if not country:
-        from fastapi import HTTPException
         raise HTTPException(404, f"Country '{code}' not found")
     return country
 

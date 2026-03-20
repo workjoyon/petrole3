@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import re
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from typing import Any
 
 import httpx
@@ -43,7 +45,6 @@ def _parse_rss(xml_text: str, source_id: str, source_name: str) -> list[dict[str
 
             # Clean up HTML from description
             if "<" in description:
-                import re
                 description = re.sub(r"<[^>]+>", "", description).strip()
             if len(description) > 300:
                 description = description[:297] + "..."
@@ -85,8 +86,6 @@ async def get_news(
                 continue
 
     # Sort by pub_date descending (newest first)
-    from email.utils import parsedate_to_datetime
-
     def sort_key(item: dict) -> datetime:
         try:
             return parsedate_to_datetime(item.get("pub_date", ""))
